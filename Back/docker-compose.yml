@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    container_name: bob_corn_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U bob -d corn_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: bob_corn_api
+    ports:
+      - '8000:8000'
+    depends_on:
+      db:
+        condition: service_healthy #
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: bob
+      DB_NAME: corn_db
+      DB_SSLMODE: disable
+      CLEANUP_INTERVAL_MINUTES: 5
+      RATE_LIMIT_WINDOW_SECONDS: 60
+
+volumes:
+  postgres_data:

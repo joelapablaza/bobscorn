@@ -1,0 +1,41 @@
+# --- NEXT.JS / NODE ---
+Front/node_modules/
+Front/.next/
+Front/out/
+Front/.env.local
+Front/.turbo/
+Front/.vercel/
+Front/next-env.d.ts
+
+# Log files
+Front/npm-debug.log*
+Front/yarn-debug.log*
+Front/yarn-error.log*
+Front/pnpm-debug.log*
+
+# Mac/Linux/Windows system files
+Front.DS_Store
+FrontThumbs.db
+
+# --- GO ---
+Back/bin/
+Back/obj/
+Back/.env*
+Back/vendor/
+Back/go.sum
+Back/tmp/
+Back/.DS_Store
+
+# Test output
+Back/coverage/
+Back/*.test
+Back/*.log
+
+# IDEs and editors
+**/.idea/
+**/.vscode/
+**/*.swp
+
+# OS files
+**.DS_Store
+**Thumbs.db
